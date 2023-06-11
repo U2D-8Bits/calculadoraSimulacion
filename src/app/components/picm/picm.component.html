@@ -1,0 +1,239 @@
+<div class="body-Container">
+  <div class="body-Container-Content">
+
+    <div class="body-Container-Content-Title">
+        <h1>POBLACION INFINITA CANAL MULTIPLE</h1>
+    </div>
+
+    <div class="body-Container-Content-Text">
+      <p>
+        Ingrese los datos solicitados para calcular la población infinita de un canal múltiple.
+      </p>
+
+
+
+        <div class="grid gap-3 px-3">
+
+
+
+
+
+          <mat-card class="col-3">
+            <form action="" [formGroup]="myForm">
+              <mat-card-header>
+                  <mat-card-title>Datos Modelo M/M/1</mat-card-title>
+              </mat-card-header>
+              <mat-card-content class="flex-column">
+                  <div class="flex-column">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Tasa de Llegada (λ)</mat-label>
+                      <input matInput placeholder="Ingrese λ" formControlName="lambda" required>
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="fill">
+                      <mat-label>Tasa de Servicio(µ)</mat-label>
+                      <input matInput placeholder="Ingrese µ" formControlName="miu" required>
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="fill">
+                      <mat-label>Servidores(k)</mat-label>
+                      <input matInput placeholder="Ingrese k" formControlName="k" required>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                      <mat-label>Clientes(n)</mat-label>
+                      <input matInput placeholder="Ingrese n" formControlName="n" required>
+                    </mat-form-field>
+
+                  </div>
+                  <button
+                  mat-raised-button
+                  type="submit"
+                  [disabled]="myForm.invalid"
+                  (click)="calculate()"
+                >
+                  Calcular
+                </button>
+              </mat-card-content>
+            </form>
+          </mat-card>
+
+
+
+          <mat-card class="col-8">
+            <mat-tab-group animationDuration="0ms">
+              <mat-tab label="Respuesta">
+                <mat-card-header>
+                  <mat-card-title>
+                    Resultados
+                  </mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="flex-column gap-3">
+                  <!-- Valores de Probabilidad -->
+                  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="mb-2">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Valores de Probabilidad
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="">
+                      <p>Probabilidad de que todos los servidores estén desocupados u ociosos a la vez</p>
+                      <mat-form-field appearance="fill">
+                        <mat-label>P0</mat-label>
+                        <input matInput placeholder="Valor de P0" value="{{this.P0}}" disabled>
+                      </mat-form-field>
+                    </div>
+                    <div class="">
+                      <p>Probabilidad de que un usuario que llega tenga que esperar</p>
+                      <mat-form-field appearance="fill">
+                        <mat-label>PK</mat-label>
+                        <input matInput placeholder="Valor de PK" value="{{this.Pk}}" disabled>
+                      </mat-form-field>
+                    </div>
+                    <div class="">
+                      <p>Probabilidad de que un usuario que llega no tenga que esperar</p>
+                      <mat-form-field appearance="fill">
+                        <mat-label>PNE</mat-label>
+                        <input matInput placeholder="Valor de PNE" value="{{this.Pne}}" disabled>
+                      </mat-form-field>
+                    </div>
+                    <div class="">
+                      <p>La probabilidad de hallar exactamente n clientes dentro del sistema</p>
+                      <mat-form-field appearance="fill">
+                        <mat-label>PN</mat-label>
+                        <input matInput placeholder="Valor de Pn" value="{{this.Pn}}" disabled>
+                      </mat-form-field>
+                    </div>
+                  </mat-expansion-panel>
+                  <!-- Valor de Numero Esperado -->
+                  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="mb-2">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Valores de Numero esperado de Clientes
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="">
+                      <p>Número esperado de clientes en el sistema</p>
+                      <mat-form-field appearance="fill">
+                        <mat-label>L</mat-label>
+                        <input matInput placeholder="Valor de L" value="{{this.L}}" disabled>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="">
+                      <p>Número esperado de clientes en la cola</p>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Lq</mat-label>
+                        <input matInput placeholder="Valor de Lq" value="{{this.Lq}}" disabled>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="">
+                      <p>Número esperado de clientes en la cola no vacía</p>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Ln</mat-label>
+                        <input matInput placeholder="Valor de Ln" value="{{this.Ln}}" disabled>
+                      </mat-form-field>
+                    </div>
+
+
+                  </mat-expansion-panel>
+                  <!-- Valor de Tiempo Esperado -->
+                  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="mb-2">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Valores de Tiempo esperado de clientes
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="">
+                      <p>Tiempo esperado en el sistema</p>
+                      <mat-form-field appearance="fill">
+                        <mat-label>W</mat-label>
+                        <input matInput placeholder="Valor de W" value="{{this.W}}" disabled>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="">
+                      <p>Tiempo esperado en cola</p>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Wq</mat-label>
+                        <input matInput placeholder="Valor de  Wq" value="{{this.Wq}}" disabled>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="">
+                      <p>Tiempo esperado en cola para colas no vacías</p>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Wn</mat-label>
+                        <input matInput placeholder="Valor de Wn" value="{{this.Wn}}" disabled>
+                      </mat-form-field>
+                    </div>
+                  </mat-expansion-panel>
+                </mat-card-content>
+              </mat-tab>
+
+
+
+              <mat-tab label="Costos">
+                <form action="" [formGroup]="costForm">
+                  <!-- <div class="grid gap-3 px-3"> -->
+                    <mat-card class="">
+                      <mat-card-header>
+                        <mat-card-title>Datos de Costos</mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content class="">
+                        <div class="flex flex-column">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Horas Diarias (H)</mat-label>
+                            <input matInput placeholder="Ingrese H" formControlName="h" required>
+                          </mat-form-field>
+
+
+                          <mat-form-field appearance="fill">
+                            <mat-label>Costo Diario por el Tiempo de Espera en Cola (CTE)</mat-label>
+                            <input matInput placeholder="Ingrese Cte" formControlName="Cte" required>
+                          </mat-form-field>
+
+                          <mat-form-field appearance="fill">
+                            <mat-label>Costo Diario por el Tiempo en el Sistema (CTS)</mat-label>
+                            <input matInput placeholder="Ingrese Cte" formControlName="Cts" required>
+                          </mat-form-field>
+
+                          <mat-form-field appearance="fill">
+                            <mat-label>Costo Diario por el Tiempo de Servicio (CTSE)</mat-label>
+                            <input matInput placeholder="Ingrese Cte" formControlName="Ctse" required>
+                          </mat-form-field>
+
+                          <mat-form-field appearance="fill">
+                            <mat-label>Costo Diario del Servidor (CS)</mat-label>
+                            <input matInput placeholder="Ingrese Cs" formControlName="Cs" required>
+                          </mat-form-field>
+                        </div>
+                        <div class="flex flex-column">
+                          <button
+                          mat-raised-button type="submit"
+                          [disabled]="costForm.invalid"
+                          (click)="calcularCT()"
+                          >
+                          Calcular
+                        </button>
+                        <mat-form-field appearance="fill">
+                          <mat-label>Costo Total (CT)</mat-label>
+                          <input matInput disabled value="{{this.ctValue}}">
+                        </mat-form-field>
+                        </div>
+                      </mat-card-content>
+                    </mat-card>
+                  <!-- </div> -->
+                </form>
+              </mat-tab>
+            </mat-tab-group>
+          </mat-card>
+        </div>
+
+    </div>
+
+  </div>
+</div>
