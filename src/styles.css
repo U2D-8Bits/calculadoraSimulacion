@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+:root{
+  --color-primary: #b41a12;
+  --color-secondary: #309435;
+  --color-accent: #b49f61;
+  --color-black: #000000;
+  --color-bg: #fff;
+  --color-blue: #0d4369;
+
+  --font-size-sm: 1.2rem;
+  --font-size-md: 1.5rem;
+  --font-size-lg: 2rem;
+
+  --border-radius-sm: 6px;
+  --font-weight-400: 400;
+  --font-weight-600: 600;
+
+
+}
+
+/* body {
+  font-family: "Public Sans", sans-serif;
+  font-size: 1.2rem;
+  min-height: 100%;
+} */
+
+
+

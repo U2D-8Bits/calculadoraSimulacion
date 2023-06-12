@@ -7,4 +7,22 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'CalculadoraSimulacion';
+
+  viewInterface: number = 0;
+
+  ngOnInit(): void {
+
+  }
+
+  changeView(event: any){
+    if(event == 1){
+      this.viewInterface = 1;
+    }else if(event == 2){
+      this.viewInterface = 2;
+    }else{
+      this.viewInterface = 0;
+    }
+  }
+
+
 }
